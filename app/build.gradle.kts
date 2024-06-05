@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.jetbrains.kotlin.android)
+  alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -62,6 +63,16 @@ dependencies {
   implementation(libs.kotlinx.coroutine.android)
   testImplementation(libs.kotlinx.coroutine.test)
   androidTestImplementation(libs.kotlinx.coroutine.test)
+
+  implementation(libs.coil.compose)
+
+  implementation(libs.okhttp.client)
+  implementation(libs.okhttp.logger)
+  testImplementation(libs.okhttp.mockWebServer)
+  implementation(libs.retrofit)
+  implementation(libs.retrofit.converter.moshi)
+  implementation(libs.moshi)
+  ksp(libs.moshi.codegen)
 
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
