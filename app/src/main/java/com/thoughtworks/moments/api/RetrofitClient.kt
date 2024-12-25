@@ -1,5 +1,7 @@
 package com.thoughtworks.moments.api
 
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -13,6 +15,11 @@ object RetrofitClient {
       if (_instance == null) {
         _instance = Retrofit.Builder()
           .baseUrl(BASE_URL)
+          .client(OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().also {
+              it.setLevel(HttpLoggingInterceptor.Level.BASIC)
+            })
+            .build())
           .addConverterFactory(MoshiConverterFactory.create())
           .build()
       }
