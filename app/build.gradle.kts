@@ -51,7 +51,7 @@ android {
 
 dependencies {
   implementation(libs.androidx.core.ktx)
-  implementation(libs.androidx.lifecycle.runtime.ktx)
+  implementation(libs.androidx.lifecycle.viewmodel)
 
   implementation(platform(libs.androidx.compose.bom))
   implementation(libs.androidx.activity.compose)
@@ -68,16 +68,19 @@ dependencies {
   implementation(libs.kotlinx.coroutine.android)
   testImplementation(libs.kotlinx.coroutine.test)
   androidTestImplementation(libs.kotlinx.coroutine.test)
+  testImplementation(libs.turbine)
 
   implementation(libs.coil.compose)
 
   implementation(libs.okhttp.client)
   implementation(libs.okhttp.logger)
-  testImplementation(libs.okhttp.mockWebServer)
+  testImplementation(libs.okhttp.mockwebserver.junit4)
   implementation(libs.retrofit)
   implementation(libs.retrofit.converter.moshi)
   implementation(libs.moshi)
   ksp(libs.moshi.codegen)
+
+  testImplementation(libs.mockk)
 
   androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.espresso.core)
