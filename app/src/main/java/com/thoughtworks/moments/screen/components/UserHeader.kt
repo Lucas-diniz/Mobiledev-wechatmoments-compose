@@ -29,5 +29,6 @@ fun UserHeader(user: User) {
 @Preview
 @Composable
 fun UserHeaderPreview() {
+  // TODO: Can we have a preview for a sample image?
   UserHeader(user = User(username = "John Doe"))
 }
