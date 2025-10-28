@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.screen
+package com.thoughtworks.moments.ui.screen
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.thoughtworks.moments.screen.components.TweetItem
-import com.thoughtworks.moments.screen.components.UserHeader
-import com.thoughtworks.moments.viewmodels.MainViewModel
+import com.thoughtworks.moments.ui.screen.components.TweetItem
+import com.thoughtworks.moments.ui.screen.components.UserHeader
+import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 
 @Composable
 fun MainScreen(

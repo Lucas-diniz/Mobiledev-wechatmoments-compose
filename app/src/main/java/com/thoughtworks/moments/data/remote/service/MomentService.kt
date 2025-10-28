@@ -1,7 +1,7 @@
-package com.thoughtworks.moments.api
+package com.thoughtworks.moments.data.remote.service
 
-import com.thoughtworks.moments.api.entry.Tweet
-import com.thoughtworks.moments.api.entry.User
+import com.thoughtworks.moments.data.dto.Tweet
+import com.thoughtworks.moments.data.dto.User
 import retrofit2.http.GET
 import retrofit2.http.Path
 

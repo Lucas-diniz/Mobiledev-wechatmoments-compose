@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.screen.components
+package com.thoughtworks.moments.ui.screen.components
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
@@ -10,7 +10,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.thoughtworks.moments.api.entry.Tweet
+import com.thoughtworks.moments.data.dto.Tweet
 
 @Composable
 fun TweetItem(

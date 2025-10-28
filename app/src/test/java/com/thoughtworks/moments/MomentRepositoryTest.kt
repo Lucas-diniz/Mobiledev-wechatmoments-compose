@@ -1,8 +1,8 @@
 package com.thoughtworks.moments
 
-import com.thoughtworks.moments.api.MomentRepository
-import com.thoughtworks.moments.api.MomentService
-import com.thoughtworks.moments.api.entry.Tweet
+import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.data.remote.service.MomentService
+import com.thoughtworks.moments.data.dto.Tweet
 import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
 import mockwebserver3.junit4.MockWebServerRule

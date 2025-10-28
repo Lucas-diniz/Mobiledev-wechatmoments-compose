@@ -1,8 +1,8 @@
-package com.thoughtworks.moments.viewmodels
+package com.thoughtworks.moments.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.thoughtworks.moments.api.MomentRepository
+import com.thoughtworks.moments.data.remote.repository.MomentRepository
 
 class MainViewModelFactory(
     private val repository: MomentRepository

@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.screen.components
+package com.thoughtworks.moments.ui.screen.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

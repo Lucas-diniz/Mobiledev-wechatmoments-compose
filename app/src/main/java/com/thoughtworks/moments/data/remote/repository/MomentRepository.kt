@@ -1,7 +1,9 @@
-package com.thoughtworks.moments.api
+package com.thoughtworks.moments.data.remote.repository
 
-import com.thoughtworks.moments.api.entry.Tweet
-import com.thoughtworks.moments.api.entry.User
+import com.thoughtworks.moments.data.dto.Tweet
+import com.thoughtworks.moments.data.dto.User
+import com.thoughtworks.moments.data.remote.service.MomentService
+import com.thoughtworks.moments.data.remote.service.RetrofitClient
 
 class MomentRepository {
 

@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.api
+package com.thoughtworks.moments.data.remote.service
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

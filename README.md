@@ -1,3 +1,15 @@
+
+### Strategy
+This project uses Clean Architecture because:
+- Complex business rules (pagination, refresh behavior)
+- Testability requirement (unit tests for UseCases)
+- Memory caching strategy needs isolation
+- Separation allows parallel development of UI and logic
+
+Layers NOT used:
+- No UseCase for static profile data (YAGNI principle)
+- Direct Entity usage in UI (no UI models) - same structure
+
 ### Requirements
 1. Android Studio Ladybug | 2024.2.1 Patch 2 - via [Android Developers](https://developer.android.com/studio)
 2. Android SDK 35- via [Android SDK Manager](https://developer.android.com/studio/intro/update#sdk-manager)

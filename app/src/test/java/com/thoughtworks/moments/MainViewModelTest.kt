@@ -1,10 +1,10 @@
 package com.thoughtworks.moments
 
 import app.cash.turbine.test
-import com.thoughtworks.moments.api.MomentRepository
-import com.thoughtworks.moments.api.entry.Tweet
-import com.thoughtworks.moments.api.entry.User
-import com.thoughtworks.moments.viewmodels.MainViewModel
+import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.data.dto.Tweet
+import com.thoughtworks.moments.data.dto.User
+import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers

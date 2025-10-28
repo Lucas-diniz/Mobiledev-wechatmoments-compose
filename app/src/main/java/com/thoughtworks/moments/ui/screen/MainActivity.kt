@@ -1,15 +1,14 @@
-package com.thoughtworks.moments
+package com.thoughtworks.moments.ui.screen
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import com.thoughtworks.moments.api.MomentRepository
-import com.thoughtworks.moments.screen.MainScreen
-import com.thoughtworks.moments.ui.theme.TheWeChatMomentsTheme
-import com.thoughtworks.moments.viewmodels.MainViewModel
-import com.thoughtworks.moments.viewmodels.MainViewModelFactory
+import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.ui.screen.theme.TheWeChatMomentsTheme
+import com.thoughtworks.moments.ui.viewmodels.MainViewModel
+import com.thoughtworks.moments.ui.viewmodels.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 

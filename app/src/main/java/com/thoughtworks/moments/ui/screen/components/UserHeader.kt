@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.screen.components
+package com.thoughtworks.moments.ui.screen.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.thoughtworks.moments.api.entry.User
+import com.thoughtworks.moments.data.dto.User
 
 @Composable
 fun UserHeader(user: User) {
