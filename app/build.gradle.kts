@@ -67,6 +67,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     testImplementation(libs.junit)
 
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.compose)
+
     implementation(libs.kotlinx.coroutine.core)
     implementation(libs.kotlinx.coroutine.android)
     testImplementation(libs.kotlinx.coroutine.test)
