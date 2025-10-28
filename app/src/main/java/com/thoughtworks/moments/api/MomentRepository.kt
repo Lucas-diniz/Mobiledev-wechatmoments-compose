@@ -5,14 +5,14 @@ import com.thoughtworks.moments.api.entry.User
 
 class MomentRepository {
 
-  private val momentService = RetrofitClient.instance.create(MomentService::class.java)
+    private val momentService = RetrofitClient.instance.create(MomentService::class.java)
 
-  suspend fun fetchUser(): User {
-    return momentService.user("jsmith")
-  }
+    suspend fun fetchUser(): User {
+        return momentService.user("jsmith")
+    }
 
-  suspend fun fetchTweets(): List<Tweet> {
-    return momentService.tweets("jsmith")
-  }
+    suspend fun fetchTweets(): List<Tweet> {
+        return momentService.tweets("jsmith")
+    }
 
 }

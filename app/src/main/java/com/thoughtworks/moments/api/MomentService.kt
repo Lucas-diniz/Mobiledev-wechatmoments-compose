@@ -7,16 +7,16 @@ import retrofit2.http.Path
 
 interface MomentService {
 
-  /**
-   * https://thoughtworks-ios.herokuapp.com/user/jsmith
-   */
-  @GET("user/{name}")
-  suspend fun user(@Path("name") user: String): User
+    /**
+     * https://thoughtworks-ios.herokuapp.com/user/jsmith
+     */
+    @GET("user/{name}")
+    suspend fun user(@Path("name") user: String): User
 
-  /**
-   * https://thoughtworks-ios.herokuapp.com/user/jsmith/tweets
-   */
-  @GET("user/{name}/tweets")
-  suspend fun tweets(@Path("name") user: String): List<Tweet>
+    /**
+     * https://thoughtworks-ios.herokuapp.com/user/jsmith/tweets
+     */
+    @GET("user/{name}/tweets")
+    suspend fun tweets(@Path("name") user: String): List<Tweet>
 
 }

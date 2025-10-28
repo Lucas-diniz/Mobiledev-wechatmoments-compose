@@ -19,46 +19,47 @@ import com.thoughtworks.moments.viewmodels.MainViewModel
 
 @Composable
 fun MainScreen(
-  mainViewModel: MainViewModel
+    mainViewModel: MainViewModel
 ) {
-  val user by mainViewModel.user.collectAsStateWithLifecycle()
-  val tweets by mainViewModel.tweets.collectAsStateWithLifecycle()
-  val listState = rememberLazyListState()
-  val endOfListReached by remember {
-    derivedStateOf {
-      listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == listState.layoutInfo.totalItemsCount - 1
-    }
-  }
 
-  LaunchedEffect(endOfListReached) {
-    if (endOfListReached) {
-      mainViewModel.loadMoreTweets()
-    }
-  }
+    val user by mainViewModel.user.collectAsStateWithLifecycle()
+    val tweets by mainViewModel.tweets.collectAsStateWithLifecycle()
+    val listState = rememberLazyListState()
 
-  Scaffold { paddingValues ->
-    LazyColumn(
-      state = listState,
-      modifier = Modifier
-        .fillMaxSize()
-        .padding(paddingValues)
-    ) {
-      items(tweets.size + 1) { index ->
-        if (index == 0) {
-          user?.let {
-            UserHeader(user = it)
-          }
-        } else {
-          TweetItem(tweets[index - 1])
+    val endOfListReached by remember {
+        derivedStateOf {
+            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index == listState.layoutInfo.totalItemsCount - 1
         }
-      }
     }
-  }
-}
 
+    LaunchedEffect(endOfListReached) {
+        if (endOfListReached) {
+            mainViewModel.loadMoreTweets()
+        }
+    }
+
+    Scaffold { paddingValues ->
+        LazyColumn(
+            state = listState,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+        ) {
+            items(tweets.size + 1) { index ->
+                if (index == 0) {
+                    user?.let {
+                        UserHeader(user = it)
+                    }
+                } else {
+                    TweetItem(tweets[index - 1])
+                }
+            }
+        }
+    }
+}
 
 @Preview
 @Composable
 fun MainScreenPreview() {
-  // TODO: Write a preview for MainScreen with two sample tweets
+    // TODO: Write a preview for MainScreen with two sample tweets
 }

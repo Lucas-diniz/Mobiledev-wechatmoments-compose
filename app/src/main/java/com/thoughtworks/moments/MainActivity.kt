@@ -13,18 +13,18 @@ import com.thoughtworks.moments.viewmodels.MainViewModelFactory
 
 class MainActivity : ComponentActivity() {
 
-  private val viewModel: MainViewModel by viewModels {
-    val repository = MomentRepository()
-    MainViewModelFactory(repository)
-  }
-
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    enableEdgeToEdge()
-    setContent {
-      TheWeChatMomentsTheme {
-        MainScreen(viewModel)
-      }
+    private val viewModel: MainViewModel by viewModels {
+        val repository = MomentRepository()
+        MainViewModelFactory(repository)
     }
-  }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            TheWeChatMomentsTheme {
+                MainScreen(viewModel)
+            }
+        }
+    }
 }

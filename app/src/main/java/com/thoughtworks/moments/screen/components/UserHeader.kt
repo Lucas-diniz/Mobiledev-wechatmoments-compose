@@ -12,23 +12,23 @@ import com.thoughtworks.moments.api.entry.User
 
 @Composable
 fun UserHeader(user: User) {
-  Box(
-    modifier = Modifier
-      .fillMaxWidth()
-  ) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
 
-    // TODO: Load user image here
-    AsyncImage(
-      model = "",
-      contentDescription = null,
-      modifier = Modifier.size(128.dp)
-    )
-  }
+        // TODO: Load user image here
+        AsyncImage(
+            model = "",
+            contentDescription = null,
+            modifier = Modifier.size(128.dp)
+        )
+    }
 }
 
 @Preview
 @Composable
 fun UserHeaderPreview() {
-  // TODO: Can we have a preview for a sample image?
-  UserHeader(user = User(username = "John Doe"))
+    // TODO: Can we have a preview for a sample image?
+    UserHeader(user = User(username = "John Doe"))
 }
