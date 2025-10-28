@@ -17,43 +17,43 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 class MomentRepositoryTest {
 
 
-  @get:Rule
-  val serverRule = MockWebServerRule()
+    @get:Rule
+    val serverRule = MockWebServerRule()
 
-  private val retrofit by lazy {
-    Retrofit.Builder()
-      .baseUrl(serverRule.server.url("/"))
-      .addConverterFactory(MoshiConverterFactory.create())
-      .build()
-  }
+    private val retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(serverRule.server.url("/"))
+            .addConverterFactory(MoshiConverterFactory.create())
+            .build()
+    }
 
-  //TODO: Pass this fake instance to moment repository
-  private val momentService by lazy {
-    retrofit.create(MomentService::class.java)
-  }
-  private val momentRepository: MomentRepository by lazy {
-    MomentRepository()
-  }
+    //TODO: Pass this fake instance to moment repository
+    private val momentService by lazy {
+        retrofit.create(MomentService::class.java)
+    }
+    private val momentRepository: MomentRepository by lazy {
+        MomentRepository()
+    }
 
-  @Test
-  fun fetchTweetsCallCorrectApi() = runTest {
-    val server = serverRule.server
+    @Test
+    fun fetchTweetsCallCorrectApi() = runTest {
+        val server = serverRule.server
 
-    server.enqueue(MockResponse(200, body = "[]"))
+        server.enqueue(MockResponse(200, body = "[]"))
 
-    val momentRepository = MomentRepository()
-    momentRepository.fetchTweets()
+        val momentRepository = MomentRepository()
+        momentRepository.fetchTweets()
 
-    val request = server.takeRequest()
+        val request = server.takeRequest()
 
-    Assert.assertEquals("/user/jsmith/tweets", request.path)
-  }
+        Assert.assertEquals("/user/jsmith/tweets", request.path)
+    }
 
-  @Test
-  fun parseResponseFromFetchTweets() = runTest {
-    val server = serverRule.server
+    @Test
+    fun parseResponseFromFetchTweets() = runTest {
+        val server = serverRule.server
 
-    val responseBody = """
+        val responseBody = """
       [
         {
           "sender": {
@@ -81,18 +81,18 @@ class MomentRepositoryTest {
       ]
     """.trimIndent()
 
-    server.enqueue(MockResponse(200, body = responseBody))
+        server.enqueue(MockResponse(200, body = responseBody))
 
-    //TODO: Test data returned from fetchTweets()
-    momentRepository.fetchTweets()
-  }
+        //TODO: Test data returned from fetchTweets()
+        momentRepository.fetchTweets()
+    }
 
-  // TODO: Make this test green!
-  @Test
-  fun skipContentWithMalformedJson() = runTest {
-    val server = serverRule.server
+    // TODO: Make this test green!
+    @Test
+    fun skipContentWithMalformedJson() = runTest {
+        val server = serverRule.server
 
-    val responseBody = """
+        val responseBody = """
       [
         {
           "content": "test-tweet"
@@ -103,14 +103,14 @@ class MomentRepositoryTest {
       ]
     """.trimIndent()
 
-    server.enqueue(MockResponse(200, body = responseBody))
+        server.enqueue(MockResponse(200, body = responseBody))
 
-    val momentRepository = MomentRepository()
+        val momentRepository = MomentRepository()
 
-    val actual = momentRepository.fetchTweets()
+        val actual = momentRepository.fetchTweets()
 
-    val expected = Tweet(content = "test-tweet")
+        val expected = Tweet(content = "test-tweet")
 
-    Assert.assertEquals(expected, actual)
-  }
+        Assert.assertEquals(expected, actual)
+    }
 }
