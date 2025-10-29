@@ -1,28 +1,27 @@
 package com.thoughtworks.moments.ui.screen
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thoughtworks.moments.ui.screen.components.TweetItem
 import com.thoughtworks.moments.ui.screen.components.UserHeader
 import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 import org.koin.androidx.compose.koinViewModel
 
+// TODO: Write a preview for MainScreen with two sample tweets (done)
 @Composable
 fun MainScreen(
     mainViewModel: MainViewModel = koinViewModel()
 ) {
-
     val user by mainViewModel.user.collectAsStateWithLifecycle()
     val tweets by mainViewModel.tweets.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
@@ -39,28 +38,23 @@ fun MainScreen(
         }
     }
 
-    Scaffold { paddingValues ->
+    Box {
         LazyColumn(
             state = listState,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(paddingValues)
         ) {
             items(tweets.size + 1) { index ->
-                if (index == 0) {
-                    user?.let {
-                        UserHeader(user = it)
+                Column(modifier = Modifier.fillMaxSize()) {
+                    if (index == 0) {
+                        user?.let {
+                            UserHeader(user = it)
+                        }
+                    } else {
+                        TweetItem(tweets[index - 1])
                     }
-                } else {
-                    TweetItem(tweets[index - 1])
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun MainScreenPreview() {
-    // TODO: Write a preview for MainScreen with two sample tweets
 }
