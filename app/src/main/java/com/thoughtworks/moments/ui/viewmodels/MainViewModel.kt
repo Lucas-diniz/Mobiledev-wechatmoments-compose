@@ -1,5 +1,6 @@
 package com.thoughtworks.moments.ui.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thoughtworks.moments.domain.entity.Tweet
