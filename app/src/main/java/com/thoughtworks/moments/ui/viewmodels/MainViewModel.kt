@@ -2,9 +2,9 @@ package com.thoughtworks.moments.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.thoughtworks.moments.data.remote.repository.MomentRepository
-import com.thoughtworks.moments.data.dto.Tweet
-import com.thoughtworks.moments.data.dto.User
+import com.thoughtworks.moments.domain.entity.Tweet
+import com.thoughtworks.moments.domain.entity.User
+import com.thoughtworks.moments.domain.repository.MomentRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 

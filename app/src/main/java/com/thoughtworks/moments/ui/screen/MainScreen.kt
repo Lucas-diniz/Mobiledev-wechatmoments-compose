@@ -16,10 +16,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thoughtworks.moments.ui.screen.components.TweetItem
 import com.thoughtworks.moments.ui.screen.components.UserHeader
 import com.thoughtworks.moments.ui.viewmodels.MainViewModel
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun MainScreen(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel = koinViewModel()
 ) {
 
     val user by mainViewModel.user.collectAsStateWithLifecycle()

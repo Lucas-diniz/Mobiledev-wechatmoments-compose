@@ -1,8 +1,8 @@
 package com.thoughtworks.moments
 
-import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.data.remote.repository.MomentRepositoryDefault
 import com.thoughtworks.moments.data.remote.service.MomentService
-import com.thoughtworks.moments.data.dto.Tweet
+import com.thoughtworks.moments.data.dto.TweetDto
 import kotlinx.coroutines.test.runTest
 import mockwebserver3.MockResponse
 import mockwebserver3.junit4.MockWebServerRule
@@ -31,8 +31,8 @@ class MomentRepositoryTest {
     private val momentService by lazy {
         retrofit.create(MomentService::class.java)
     }
-    private val momentRepository: MomentRepository by lazy {
-        MomentRepository()
+    private val momentRepositoryDefault: MomentRepositoryDefault by lazy {
+        MomentRepositoryDefault()
     }
 
     @Test
@@ -41,8 +41,8 @@ class MomentRepositoryTest {
 
         server.enqueue(MockResponse(200, body = "[]"))
 
-        val momentRepository = MomentRepository()
-        momentRepository.fetchTweets()
+        val momentRepositoryDefault = MomentRepositoryDefault()
+        momentRepositoryDefault.fetchTweets()
 
         val request = server.takeRequest()
 
@@ -84,7 +84,7 @@ class MomentRepositoryTest {
         server.enqueue(MockResponse(200, body = responseBody))
 
         //TODO: Test data returned from fetchTweets()
-        momentRepository.fetchTweets()
+        momentRepositoryDefault.fetchTweets()
     }
 
     // TODO: Make this test green!
@@ -105,11 +105,11 @@ class MomentRepositoryTest {
 
         server.enqueue(MockResponse(200, body = responseBody))
 
-        val momentRepository = MomentRepository()
+        val momentRepositoryDefault = MomentRepositoryDefault()
 
-        val actual = momentRepository.fetchTweets()
+        val actual = momentRepositoryDefault.fetchTweets()
 
-        val expected = Tweet(content = "test-tweet")
+        val expected = TweetDto(content = "test-tweet")
 
         Assert.assertEquals(expected, actual)
     }

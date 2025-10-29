@@ -1,9 +1,9 @@
 package com.thoughtworks.moments
 
 import app.cash.turbine.test
-import com.thoughtworks.moments.data.remote.repository.MomentRepository
-import com.thoughtworks.moments.data.dto.Tweet
-import com.thoughtworks.moments.data.dto.User
+import com.thoughtworks.moments.data.remote.repository.MomentRepositoryDefault
+import com.thoughtworks.moments.domain.entity.Tweet
+import com.thoughtworks.moments.domain.entity.User
 import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -28,7 +28,7 @@ class MainViewModelTest {
         Tweet(content = "Tweet no. $it")
     }
     private val user = User(username = "some user")
-    private val repository: MomentRepository = mockk() {
+    private val repository: MomentRepositoryDefault = mockk() {
         coEvery {
             fetchTweets()
         } returns tweets
