@@ -10,13 +10,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.thoughtworks.moments.data.dto.Tweet
+import com.thoughtworks.moments.domain.entity.Tweet
 
 @Composable
 fun TweetItem(
     tweet: Tweet
 ) {
-    Text(tweet.content.orEmpty())
+    Text(tweet.content)
 }
 
 // TODO: Rework this to be more user friendly for different form factors

@@ -1,14 +1,22 @@
 
-### Strategy
+### Architecture decision
+
 This project uses Clean Architecture because:
 - Complex business rules (pagination, refresh behavior)
 - Testability requirement (unit tests for UseCases)
 - Memory caching strategy needs isolation
 - Separation allows parallel development of UI and logic
 
-Layers NOT used:
-- No UseCase for static profile data (YAGNI principle)
-- Direct Entity usage in UI (no UI models) - same structure
+Used Kotlin extension functions for DTO → Entity conversion instead of:
+- DTO methods (violates SRP, couples Data → Domain)
+- Mapper class (it is a overkill for stateless transformations)
+- Extension functions provide:
+  - Clean separation of concerns
+  - Testable in isolation
+  - Idiomatic Kotlin syntax
+  - No unnecessary classes
+
+------------------------------------------------------------
 
 ### Requirements
 1. Android Studio Ladybug | 2024.2.1 Patch 2 - via [Android Developers](https://developer.android.com/studio)

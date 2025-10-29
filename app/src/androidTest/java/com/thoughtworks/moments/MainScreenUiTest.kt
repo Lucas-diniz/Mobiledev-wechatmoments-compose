@@ -5,7 +5,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
-import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.data.remote.repository.MomentRepositoryDefault
 import com.thoughtworks.moments.ui.screen.MainScreen
 import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 import org.junit.Rule
@@ -16,7 +16,7 @@ class MainScreenUiTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val mainViewModel = MainViewModel(MomentRepository())
+    private val mainViewModel = MainViewModel(MomentRepositoryDefault())
 
     @Test
     fun displayFirstFiveTweets() {

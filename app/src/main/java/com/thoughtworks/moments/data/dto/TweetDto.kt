@@ -3,6 +3,6 @@ package com.thoughtworks.moments.data.dto
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class User(
-    val username: String?
+data class TweetDto(
+    val content: String?
 )
