@@ -1,4 +1,4 @@
-package com.thoughtworks.moments.ui.theme
+package com.thoughtworks.moments.ui.screen.theme
 
 import androidx.compose.ui.graphics.Color
 

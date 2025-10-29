@@ -5,47 +5,47 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
-import com.thoughtworks.moments.api.MomentRepository
-import com.thoughtworks.moments.screen.MainScreen
-import com.thoughtworks.moments.viewmodels.MainViewModel
+import com.thoughtworks.moments.data.remote.repository.MomentRepository
+import com.thoughtworks.moments.ui.screen.MainScreen
+import com.thoughtworks.moments.ui.viewmodels.MainViewModel
 import org.junit.Rule
 import org.junit.Test
 
 class MainScreenUiTest {
 
-  @get:Rule
-  val composeTestRule = createComposeRule()
+    @get:Rule
+    val composeTestRule = createComposeRule()
 
-  private val mainViewModel = MainViewModel(MomentRepository())
+    private val mainViewModel = MainViewModel(MomentRepository())
 
-  @Test
-  fun displayFirstFiveTweets() {
-    composeTestRule.setContent {
-      MainScreen(mainViewModel = mainViewModel)
+    @Test
+    fun displayFirstFiveTweets() {
+        composeTestRule.setContent {
+            MainScreen(mainViewModel = mainViewModel)
+        }
+
+        composeTestRule.onNodeWithText("Cheng Yao").assertIsDisplayed()
+        composeTestRule.onNodeWithText("First post!").assertIsDisplayed()
+
+        composeTestRule.onNodeWithText("Xin Ge").assertIsDisplayed()
+
+        composeTestRule.onNodeWithText("Yang Luo").assertIsDisplayed()
+
+        composeTestRule.onNodeWithText("Jianing Zheng").assertIsDisplayed()
+
+        composeTestRule.onNodeWithText("Wei Fan").assertIsDisplayed()
+
+        // TODO: could we test correct image is displayed?
     }
 
-    composeTestRule.onNodeWithText("Cheng Yao").assertIsDisplayed()
-    composeTestRule.onNodeWithText("First post!").assertIsDisplayed()
+    @Test
+    fun displayUserHeader() {
+        // TODO: Complete this test
+    }
 
-    composeTestRule.onNodeWithText("Xin Ge").assertIsDisplayed()
-
-    composeTestRule.onNodeWithText("Yang Luo").assertIsDisplayed()
-
-    composeTestRule.onNodeWithText("Jianing Zheng").assertIsDisplayed()
-
-    composeTestRule.onNodeWithText("Wei Fan").assertIsDisplayed()
-
-    // TODO: could we test correct image is displayed?
-  }
-
-  @Test
-  fun displayUserHeader() {
-    // TODO: Complete this test
-  }
-
-  @Test
-  fun loadMoreTweetsWhenScrollingDOwn() {
-    // TODO: Complete this test
-    composeTestRule.onNodeWithTag("").performScrollToIndex(4)
-  }
+    @Test
+    fun loadMoreTweetsWhenScrollingDOwn() {
+        // TODO: Complete this test
+        composeTestRule.onNodeWithTag("").performScrollToIndex(4)
+    }
 }
