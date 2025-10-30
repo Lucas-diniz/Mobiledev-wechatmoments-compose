@@ -7,7 +7,11 @@ import com.thoughtworks.moments.domain.entity.User
 import com.thoughtworks.moments.domain.repository.MomentRepository
 import com.thoughtworks.moments.domain.useCase.GetInitialTweetsUseCase
 import com.thoughtworks.moments.domain.useCase.LoadMoreTweetsUseCase
+import com.thoughtworks.moments.ui.screen.MainScreenUiState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MainViewModel(
@@ -20,7 +24,8 @@ class MainViewModel(
     val tweets: MutableStateFlow<List<Tweet>> = MutableStateFlow(emptyList())
     private val _tweetsList = mutableListOf<Tweet>()
 
-    private var isLoadingMore = false
+    private val _uiState = MutableStateFlow(MainScreenUiState())
+    val uiState = _uiState.asStateFlow()
 
     init {
         loadUser()
@@ -28,31 +33,44 @@ class MainViewModel(
     }
 
     private fun loadUser() {
+        _uiState.update { it.copy(isLoadingUser = true) }
         viewModelScope.launch {
-            repository.fetchUser().onSuccess {
-                user.emit(it)
+            repository.fetchUser().onSuccess { userData ->
+                user.emit(userData)
+                _uiState.update { it.copy(isLoadingUser = false) }
             }
         }
     }
 
     private fun loadTweets() {
+        _uiState.update { it.copy(isLoadingTweets = true) }
         viewModelScope.launch {
             getInitialTweetsUseCase.invoke().onSuccess {
+                _uiState.update { it.copy(isLoadingTweets = false) }
                 tweets.emit(_tweetsList.toList())
             }
         }
     }
 
     fun loadMoreTweets() {
-        if (isLoadingMore) return
-
-        isLoadingMore = true
+        if (_uiState.value.isLoadingMore) return
+        _uiState.update { it.copy(isLoadingMore = true) }
         viewModelScope.launch {
+            delay(500) // Simulate network delay
             loadMoreTweetsUseCase.invoke(_tweetsList.size).onSuccess {
                 _tweetsList.addAll(it)
                 tweets.emit(_tweetsList.toList())
             }
-            isLoadingMore = false
+            _uiState.update { it.copy(isLoadingMore = false) }
+        }
+    }
+
+    fun refreshTweets() {
+        viewModelScope.launch {
+            _uiState.update { it.copy(isRefreshing = true) }
+            delay(1300) // Simulate network delay
+            loadTweets()
+            _uiState.update { it.copy(isRefreshing = false) }
         }
     }
 }
