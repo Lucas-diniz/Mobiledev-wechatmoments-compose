@@ -16,6 +16,19 @@ Used Kotlin extension functions for DTO → Entity conversion instead of:
   - Idiomatic Kotlin syntax
   - No unnecessary classes
 
+### Architecture Decision: Memory Trade-off
+
+Current implementation duplicates tweet list:
+- There is different responsibility to each layer:
+  - Repository cache: prevents API calls
+  - ViewModel state: enables instant pagination
+- Both are small on memory ram and there is no significant impact on performance.
+
+When to refactor (scaling criteria):
+- Items > 1000 → Use Paging 3 library
+- Item size > 1MB → Use Room database + Flow
+- Multiple consumers → Implement Flow-based single source
+
 ------------------------------------------------------------
 
 ### Requirements

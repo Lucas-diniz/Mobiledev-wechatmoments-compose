@@ -1,28 +1,26 @@
 package com.thoughtworks.moments.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.thoughtworks.moments.domain.entity.Tweet
 import com.thoughtworks.moments.domain.entity.User
 import com.thoughtworks.moments.domain.repository.MomentRepository
+import com.thoughtworks.moments.domain.useCase.GetInitialTweetsUseCase
+import com.thoughtworks.moments.domain.useCase.LoadMoreTweetsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
 class MainViewModel(
-    private val repository: MomentRepository
+    private val repository: MomentRepository,
+    private val getInitialTweetsUseCase: GetInitialTweetsUseCase,
+    private val loadMoreTweetsUseCase: LoadMoreTweetsUseCase
 ) : ViewModel() {
 
     val user: MutableStateFlow<User?> = MutableStateFlow(null)
-
-    val tweets: MutableStateFlow<List<Tweet>> = MutableStateFlow<List<Tweet>>(emptyList())
+    val tweets: MutableStateFlow<List<Tweet>> = MutableStateFlow(emptyList())
     private val _tweetsList = mutableListOf<Tweet>()
 
-    private var allTweets: List<Tweet> = emptyList()
-
-    companion object {
-        private const val PAGE_TWEET_COUNT = 5
-    }
+    private var isLoadingMore = false
 
     init {
         loadUser()
@@ -31,32 +29,30 @@ class MainViewModel(
 
     private fun loadUser() {
         viewModelScope.launch {
-            try {
-                user.emit(repository.fetchUser())
-            } catch (e: Exception) {
-                e.printStackTrace()
+            repository.fetchUser().onSuccess {
+                user.emit(it)
             }
         }
     }
 
     private fun loadTweets() {
         viewModelScope.launch {
-            allTweets = try {
-                repository.fetchTweets()
-            } catch (e: Exception) {
-                e.printStackTrace()
-                emptyList()
+            getInitialTweetsUseCase.invoke().onSuccess {
+                tweets.emit(_tweetsList.toList())
             }
-
-            _tweetsList.addAll(allTweets.subList(0, PAGE_TWEET_COUNT.coerceAtMost(allTweets.size)))
-            tweets.emit(_tweetsList)
         }
     }
 
     fun loadMoreTweets() {
+        if (isLoadingMore) return
+
+        isLoadingMore = true
         viewModelScope.launch {
-            // TODO: Implement Pagination
-            tweets.emit(_tweetsList)
+            loadMoreTweetsUseCase.invoke(_tweetsList.size).onSuccess {
+                _tweetsList.addAll(it)
+                tweets.emit(_tweetsList.toList())
+            }
+            isLoadingMore = false
         }
     }
 }

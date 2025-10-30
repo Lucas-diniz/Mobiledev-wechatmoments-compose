@@ -1,7 +1,7 @@
 package com.thoughtworks.moments.di
 
 import com.thoughtworks.moments.data.remote.NetworkConfig.BASE_URL
-import com.thoughtworks.moments.data.remote.repository.MomentRepositoryDefault
+import com.thoughtworks.moments.data.repository.MomentRepositoryDefault
 import com.thoughtworks.moments.data.remote.service.MomentService
 import com.thoughtworks.moments.domain.repository.MomentRepository
 import okhttp3.OkHttpClient

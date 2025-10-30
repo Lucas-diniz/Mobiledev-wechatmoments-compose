@@ -1,9 +1,8 @@
 package com.thoughtworks.moments.ui.screen
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,9 +18,8 @@ import org.koin.androidx.compose.koinViewModel
 
 // TODO: Write a preview for MainScreen with two sample tweets (done)
 @Composable
-fun MainScreen(
-    mainViewModel: MainViewModel = koinViewModel()
-) {
+fun MainScreen(mainViewModel: MainViewModel = koinViewModel()) {
+
     val user by mainViewModel.user.collectAsStateWithLifecycle()
     val tweets by mainViewModel.tweets.collectAsStateWithLifecycle()
     val listState = rememberLazyListState()
@@ -38,23 +36,18 @@ fun MainScreen(
         }
     }
 
-    Box {
-        LazyColumn(
-            state = listState,
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            items(tweets.size + 1) { index ->
-                Column(modifier = Modifier.fillMaxSize()) {
-                    if (index == 0) {
-                        user?.let {
-                            UserHeader(user = it)
-                        }
-                    } else {
-                        TweetItem(tweets[index - 1])
-                    }
-                }
-            }
+    LazyColumn(
+        state = listState,
+        modifier = Modifier.fillMaxSize()
+    ) {
+        item {
+            user?.let { UserHeader(it) }
+        }
+        items(
+            items = tweets,
+            key = { tweet -> tweet.id }
+        ) { tweet ->
+            TweetItem(tweet)
         }
     }
 }
