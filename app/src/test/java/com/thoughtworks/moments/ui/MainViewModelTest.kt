@@ -26,8 +26,8 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-// TODO : Fix this test
-// TODO : Complete this test before coding for pagination
+// TODO : Fix this test (done)
+// TODO : Complete this test before coding for pagination (done)
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModelTest {
 

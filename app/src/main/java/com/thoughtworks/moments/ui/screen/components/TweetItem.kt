@@ -71,7 +71,8 @@ fun TweetItem(
                         contentDescription = tweet.name,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(200.dp),
+                            .height(100.dp)
+                            .testTag("tweet_item_img"),
                         contentScale = ContentScale.Crop
                     )
                 }
