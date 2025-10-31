@@ -8,7 +8,6 @@ import com.thoughtworks.moments.domain.repository.MomentRepository
 import com.thoughtworks.moments.domain.useCase.GetInitialTweetsUseCase
 import com.thoughtworks.moments.domain.useCase.LoadMoreTweetsUseCase
 import com.thoughtworks.moments.ui.screen.MainScreenUiState
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -56,7 +55,6 @@ class MainViewModel(
         if (_uiState.value.isLoadingMore) return
         _uiState.update { it.copy(isLoadingMore = true) }
         viewModelScope.launch {
-            delay(500) // Simulate network delay
             loadMoreTweetsUseCase.invoke(_tweetsList.size).onSuccess {
                 _tweetsList.addAll(it)
                 tweets.emit(_tweetsList.toList())
@@ -68,7 +66,6 @@ class MainViewModel(
     fun refreshTweets() {
         viewModelScope.launch {
             _uiState.update { it.copy(isRefreshing = true) }
-            delay(1300) // Simulate network delay
             loadTweets()
             _uiState.update { it.copy(isRefreshing = false) }
         }

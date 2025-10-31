@@ -16,6 +16,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.thoughtworks.moments.ui.screen.components.TweetItem
 import com.thoughtworks.moments.ui.screen.components.UserHeader
@@ -52,14 +53,15 @@ fun MainScreen(mainViewModel: MainViewModel = koinViewModel()) {
         ) {
             LazyColumn(
                 state = listState,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier
+                    .fillMaxSize()
+                    .testTag("tweets_list")
             ) {
                 item {
                     user?.let { UserHeader(it) }
                 }
                 items(
                     items = tweets,
-                    key = { tweet -> tweet.id }
                 ) { tweet ->
                     TweetItem(tweet)
                 }
@@ -67,7 +69,9 @@ fun MainScreen(mainViewModel: MainViewModel = koinViewModel()) {
                 item {
                     if (uiState.isLoadingUser || uiState.isLoadingMore || uiState.isLoadingTweets || uiState.isRefreshing) {
                         Box(
-                            modifier = Modifier.fillMaxWidth(),
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("loading_indicator"),
                             contentAlignment = Alignment.Center
                         ) {
                             CircularProgressIndicator()
