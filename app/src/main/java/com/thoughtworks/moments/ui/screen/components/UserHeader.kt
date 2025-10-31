@@ -39,14 +39,13 @@ fun UserHeader(user: User) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(240.dp)
+            .height(180.dp)
     ) {
         UserHeaderPreview(user)
         PictureInPicture(
             user = user,
             modifier = Modifier
-                .align(Alignment.TopEnd)
-                .padding(top = 145.dp, end = 16.dp)
+                .align(Alignment.BottomEnd)
         )
     }
 }
