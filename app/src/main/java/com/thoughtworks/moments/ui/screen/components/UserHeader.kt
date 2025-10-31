@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -70,7 +71,8 @@ fun PictureInPicture(user: User, modifier: Modifier = Modifier) {
                 modifier = Modifier
                     .size(100.dp, 90.dp)
                     .padding(5.dp)
-                    .clip(RoundedCornerShape(12.dp)),
+                    .clip(RoundedCornerShape(12.dp))
+                    .testTag("user_img_profile"),
                 contentScale = ContentScale.Crop
             )
         }
@@ -82,7 +84,7 @@ fun UserHeaderPreview(user: User) {
     AsyncImage(
         model = user.userBackGround,
         contentDescription = null,
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize().testTag("user_img_background"),
         contentScale = ContentScale.Crop
     )
     Row(
