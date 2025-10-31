@@ -44,8 +44,9 @@ class MainViewModel(
     private fun loadTweets() {
         _uiState.update { it.copy(isLoadingTweets = true) }
         viewModelScope.launch {
-            getInitialTweetsUseCase.invoke().onSuccess {
+            getInitialTweetsUseCase.invoke().onSuccess { list ->
                 _uiState.update { it.copy(isLoadingTweets = false) }
+                _tweetsList.addAll(list)
                 tweets.emit(_tweetsList.toList())
             }
         }
@@ -66,6 +67,7 @@ class MainViewModel(
     fun refreshTweets() {
         viewModelScope.launch {
             _uiState.update { it.copy(isRefreshing = true) }
+            _tweetsList.clear()
             loadTweets()
             _uiState.update { it.copy(isRefreshing = false) }
         }
